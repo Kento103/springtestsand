@@ -1,9 +1,12 @@
 package com.kento.springtest.Repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.kento.springtest.model.User;
+
 
 /*
  * Repositoryのインターフェースを作成
@@ -17,6 +20,10 @@ import com.kento.springtest.model.User;
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> { // JpaRepository<[対象となるエンティティ], [その主キーの型を指定する]> 例）JpaRepository<User Integer>
-    User findByEmail(String email); // カスタムメゾット、メールアドレスで検索
+    Optional<User> findByEmail(String email); // カスタムメゾット、メールアドレスで検索(旧メゾット依存性確保のため、変更しない)
+
+    //Optional<User> findByUsername(String username); //ユーザーネームから検索する使わない
+
+    //Optional<User> findByEmail2(String email); // メールアドレスから検索する（使わない
 
 }
