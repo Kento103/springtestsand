@@ -16,7 +16,7 @@ import com.kento.springtest.model.User;
  * count() 全部の件数を取得する
  */
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Integer> { // JpaRepository<[対象となるエンティティ], [その主キーの型を指定する]> 例）JpaRepository<User Integer>
     User findByEmail(String email); // カスタムメゾット、メールアドレスで検索
 
 }
