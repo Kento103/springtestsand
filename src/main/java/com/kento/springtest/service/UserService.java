@@ -1,6 +1,7 @@
 package com.kento.springtest.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
     @Autowired
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     // 全ユーザを取得する
     public List<User> getAllUsers() {
@@ -36,5 +38,12 @@ public class UserService {
     // ユーザーを削除
     public void deleteUser(Integer id) {
         userRepository.deleteById(id);
+    }
+
+    // ユーザーを登録(新)
+    public User registerUser(String username, String email, String password) {
+        String encodedPassword = passwordEncoder.encode(password);
+        User user = new User(username, email, encodedPassword, "ROLE_USER"); // パスワードについてはハッシュ化して、安全に保存する
+        return userRepository.save(user);
     }
 }

@@ -25,7 +25,7 @@ public class SecurityConfig {
         http.formLogin(login -> login
             .loginProcessingUrl("/login") // ログイン
             .loginPage("/login") // ログインページの指定
-            .defaultSuccessUrl("/user") // ログイン成功した時にリダイレクトするページ
+            .defaultSuccessUrl("/user", true) // ログイン成功した時にリダイレクトするページ
             .failureUrl("/login?error") // ログイン失敗したときに移動するページ
             .permitAll() // このページは誰でも許可
         ).logout(logout -> logout
@@ -33,6 +33,7 @@ public class SecurityConfig {
         ).authorizeHttpRequests(authz -> authz
             .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // 静的なものはすべて権限なしでも許可する
             .requestMatchers("/").permitAll() // 権限なしでも許可する
+            .requestMatchers("/register").permitAll() // 権限なしでも許可する
             .requestMatchers("/profile/**").permitAll() // 権限なしでも許可する
             .requestMatchers("/user").hasAnyRole("USER", "ADMIN") // USER、ADMINロールのみ許可する
             .anyRequest().authenticated() // ルールにないものは常に認証が必要

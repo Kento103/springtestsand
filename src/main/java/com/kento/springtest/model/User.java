@@ -46,10 +46,11 @@ public class User implements UserDetails {
      * ほんとはメンバ変数に書きたいけど、Springdata JPAの仕様で直接記載が出来ない。そのため、コンストラクタに以下のように記載してぬるぽを行う。
      * 参考： https://qiita.com/komatsuh/items/30bcdd7e4037005e0d4d
      */
-    public User(Optional<Integer> id, Optional<String> username, Optional<String> email, String password) {
-        this.id = id.orElseGet(() -> null); // nullを許容する物はこの構文で記述する
-        this.email = email.orElseGet(() -> null); // nullが入る可能性のあるものはこの構文で記述する
-        this.password = password; // nullを許容しないものはこれでOK
+    public User(String username, String email, String password, String role) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.role = role;
     }
 
     // 上で設定したものに加え、これも必要
