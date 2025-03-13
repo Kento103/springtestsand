@@ -7,13 +7,16 @@ import java.util.List;
 
 import com.kento.springtest.Repository.UserRepository;
 import com.kento.springtest.model.User;
+
+import lombok.RequiredArgsConstructor;
 /*
  * Service ビジネスロジックを作成するクラスを作成する
  */
 @Service
+@RequiredArgsConstructor // lombok(定数[final]にしたもののコンストラクタを自動生成してくれる)
 public class UserService {
     @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     // 全ユーザを取得する
     public List<User> getAllUsers() {
